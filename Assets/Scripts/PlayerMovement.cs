@@ -1,10 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float PlayerMoveSpeed = 5f;
 
+    public LayerMask Grass;
 
     public bool IsPlayerMoving;
 
@@ -12,6 +14,12 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D PlayerRB;
 
     private Animator GeorgeAnimator;
+
+
+
+    public float encounterCooldownTime = 2f;
+    private float encounterCooldown;
+
 
     private void Awake()
     {
@@ -23,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (encounterCooldown > 0)
+            encounterCooldown -= Time.deltaTime;
+
 
         Movement.x = Input.GetAxisRaw("Horizontal");
         Movement.y = Input.GetAxisRaw("Vertical");
@@ -69,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        EnemyEncounter();
     }
      void FixedUpdate()
     {
@@ -87,5 +99,22 @@ public class PlayerMovement : MonoBehaviour
         GeorgeAnimator.SetBool("RightIdle", false);
          GeorgeAnimator.SetBool("UpIdle", false);
         GeorgeAnimator.SetBool("DownIdle", false);
+    }
+    private void EnemyEncounter()
+    {
+        if (encounterCooldown <= 0 && IsPlayerMoving &&
+              Physics2D.OverlapCircle(transform.position, 0.2f, Grass) != null)
+        {
+            if (Random.Range(1, 101) <= 1) 
+            {
+                encounterCooldown = encounterCooldownTime;
+                StartEncounter();
+            }
+        }
+    }
+    private void StartEncounter()
+    {
+        
+        SceneManager.LoadScene("BattleScene");
     }
 }
