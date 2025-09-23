@@ -44,6 +44,9 @@ TagManager:
   - name: Tiles
     uniqueID: 2278332509
     locked: 0
+  - name: Grass
+    uniqueID: 2582129331
+    locked: 0
   - name: Player
     uniqueID: 4270259761
     locked: 0
