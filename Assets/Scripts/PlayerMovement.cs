@@ -17,8 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    public float encounterCooldownTime = 2f;
-    private float encounterCooldown;
+    public float encounterCooldownTime = 2f; //devlog 2 
+    private float encounterCooldown = 5f; //devlog 2
 
 
     private void Awake()
@@ -100,6 +100,8 @@ public class PlayerMovement : MonoBehaviour
          GeorgeAnimator.SetBool("UpIdle", false);
         GeorgeAnimator.SetBool("DownIdle", false);
     }
+
+    //devlog 2
     private void EnemyEncounter()
     {
         if (encounterCooldown <= 0 && IsPlayerMoving &&
@@ -115,6 +117,6 @@ public class PlayerMovement : MonoBehaviour
     private void StartEncounter()
     {
         
-        SceneManager.LoadScene("BattleScene");
+        SceneManager.LoadScene("EncounterScene");
     }
 }
