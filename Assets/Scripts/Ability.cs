@@ -14,5 +14,9 @@ public class Ability
         this.power = power;
         this.description = description;
     }
-
+    public void Use(Character user, Character target)
+    {
+        target.TakeDamage(power);
+        Debug.Log($"{user.characterName} used {abilityName} on {target.characterName}, dealing {power} damage!");
+    }
 }
