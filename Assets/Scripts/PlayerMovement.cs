@@ -107,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
         if (encounterCooldown <= 0 && IsPlayerMoving &&
               Physics2D.OverlapCircle(transform.position, 0.2f, Grass) != null)
         {
+
             if (Random.Range(1, 101) <= 1) 
             {
                 encounterCooldown = encounterCooldownTime;
