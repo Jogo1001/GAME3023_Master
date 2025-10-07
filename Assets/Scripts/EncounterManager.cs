@@ -21,6 +21,8 @@ public class EncounterManager : MonoBehaviour
     private void Start()
     {
         InitializeAbilities();
+        GenerateAbilityButtons();
+        fleeButton.onClick.AddListener(Flee);
     }
     private void InitializeAbilities()
     {
@@ -34,14 +36,63 @@ public class EncounterManager : MonoBehaviour
         if (firstWin)
             playerAbilities.Add(new Ability("Lightning", 20, "A powerful new move!"));
     }
+    private void GenerateAbilityButtons()
+    {
+        // Clear old buttons
+        foreach (Transform child in abilityButtonContainer)
+            Destroy(child.gameObject);
+
+        // Create buttons dynamically
+        foreach (Ability ability in playerAbilities)
+        {
+            Button btn = Instantiate(abilityButtonPrefab, abilityButtonContainer);
+            btn.GetComponentInChildren<Text>().text = ability.abilityName;  
+            btn.onClick.AddListener(() => OnAbilitySelected(ability));
+        }
+    }
+    private void OnAbilitySelected(Ability ability)
+    {
+        if (!playerTurn) return;
+
+        ability.Use(player, enemy);
+
+        if (enemy.IsDefeated())
+        {
+            PlayerWin();
+            return;
+        }
+
+        playerTurn = false;
+        Invoke(nameof(EnemyTurn), 1f); 
+    }
+    private void EnemyTurn()
+    {
+        Debug.Log("Enemy attacks!");
+        player.TakeDamage(5);
+
+        if (player.IsDefeated())
+        {
+            Debug.Log("Player defeated!");
+            SceneManager.LoadScene("Devlog");
+            return;
+        }
+
+        playerTurn = true;
+    }
+    private void PlayerWin()
+    {
+        if (PlayerPrefs.GetInt("FirstWin", 0) == 0)
+        {
+            PlayerPrefs.SetInt("FirstWin", 1);
+            PlayerPrefs.Save();
+            Debug.Log("First win! New ability unlocked for future battles.");
+        }
+
+        SceneManager.LoadScene("Devlog");
+    }
     public void Flee()
     {
         Debug.Log("Player fled the battle!");
-        SceneManager.LoadScene("Devlog"); 
-    }
-
-    private void UseAbility(string abilityName)
-    {
-
+        SceneManager.LoadScene("Devlog");
     }
 }
