@@ -104,8 +104,11 @@ public class EncounterManager : MonoBehaviour
     }
     private Ability ChooseEnemyAbility(List<Ability> abilities)
     {
-
-        return null;
+        bool goStrong = Random.value < 0.6f;
+        if (goStrong)
+            return abilities.OrderByDescending(a => a.power).First();
+        else
+            return abilities[Random.Range(0, abilities.Count)];
     }
 
 
