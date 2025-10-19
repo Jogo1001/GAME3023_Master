@@ -5,6 +5,7 @@ public class Character : MonoBehaviour
     public string characterName;
     public int maxHP = 50;
     public int currentHP;
+    public int currentMana;
 
     private void Start()
     {
