@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -59,6 +58,11 @@ public class EncounterManager : MonoBehaviour
     private void OnAbilitySelected(Ability ability)
     {
         if (!playerTurn) return;
+        if (player.currentMana < ability.manaCost)
+        {
+            Debug.Log("Not enough mana!");
+            return;
+        }
 
         ability.Use(player, enemy);
 
@@ -69,7 +73,7 @@ public class EncounterManager : MonoBehaviour
         }
 
         playerTurn = false;
-        Invoke(nameof(EnemyTurn), 1f); 
+        Invoke(nameof(EnemyTurn), 1.2f);
     }
     private void EnemyTurn()
     {
