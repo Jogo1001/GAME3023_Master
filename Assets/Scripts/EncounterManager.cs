@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class EncounterManager : MonoBehaviour
     public Button abilityButtonPrefab;
 
     private List<Ability> playerAbilities = new List<Ability>();
+    private List<Ability> enemyAbilities = new List<Ability>();
     private bool playerTurn = true;
 
     private void Start()
@@ -28,13 +30,17 @@ public class EncounterManager : MonoBehaviour
     {
    
         bool firstWin = PlayerPrefs.GetInt("FirstWin", 0) == 1;
-
+        //Player Abilities
         playerAbilities.Clear();
-        playerAbilities.Add(new Ability("Tackle", 10, "A basic hit."));
-        playerAbilities.Add(new Ability("Blast", 15, "A stronger attack."));
-
+        playerAbilities.Add(new Ability("Tackle", 10, 5, "A basic hit."));
+        playerAbilities.Add(new Ability("Blast", 15, 10, "A stronger attack."));
         if (firstWin)
-            playerAbilities.Add(new Ability("Lightning", 20, "A powerful new move!"));
+            playerAbilities.Add(new Ability("Lightning", 20,15, "A powerful new move!"));
+
+        //Enemy Abilities
+        enemyAbilities.Clear();
+        enemyAbilities.Add(new Ability("Claw Swipe", 8, 5, "A simple physical strike."));
+        enemyAbilities.Add(new Ability("Fire Breath", 14, 10, "A fiery attack that burns energy."));
     }
     private void GenerateAbilityButtons()
     {
@@ -46,7 +52,7 @@ public class EncounterManager : MonoBehaviour
         foreach (Ability ability in playerAbilities)
         {
             Button btn = Instantiate(abilityButtonPrefab, abilityButtonContainer);
-            btn.GetComponentInChildren<Text>().text = ability.abilityName;  
+            btn.GetComponentInChildren<Text>().text = $"{ability.abilityName} (MP: {ability.manaCost})";
             btn.onClick.AddListener(() => OnAbilitySelected(ability));
         }
     }
