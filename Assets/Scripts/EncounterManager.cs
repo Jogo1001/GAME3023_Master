@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -77,8 +78,20 @@ public class EncounterManager : MonoBehaviour
     }
     private void EnemyTurn()
     {
-        Debug.Log("Enemy attacks!");
-        player.TakeDamage(5);
+        var usableAbilities = enemyAbilities
+             .Where(a => enemy.currentMana >= a.manaCost)
+             .ToList();
+
+        if (usableAbilities.Count == 0)
+        {
+            Debug.Log("Enemy skips turn due to low mana!");
+            playerTurn = true;
+            return;
+        }
+
+       
+        Ability chosenAbility = ChooseEnemyAbility(usableAbilities);
+        chosenAbility.Use(enemy, player);
 
         if (player.IsDefeated())
         {
@@ -89,6 +102,13 @@ public class EncounterManager : MonoBehaviour
 
         playerTurn = true;
     }
+    private Ability ChooseEnemyAbility(List<Ability> abilities)
+    {
+
+        return null;
+    }
+
+
     private void PlayerWin()
     {
         if (PlayerPrefs.GetInt("FirstWin", 0) == 0)
