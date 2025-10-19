@@ -16,17 +16,17 @@ public class Ability
         this.manaCost = manaCost;
         this.description = description;
     }
-    public void Use(Character user, Character target)
+    public void Use(Character user, Character target, System.Action<string> onLog)
     {
         if (user.currentMana < manaCost)
         {
-            Debug.Log($"{user.characterName} tried to use {abilityName} but didn’t have enough mana!");
+            onLog?.Invoke($"{user.characterName} tried to use {abilityName}, but didn’t have enough mana!");
             return;
         }
 
         user.currentMana -= manaCost;
         target.TakeDamage(power);
-        Debug.Log($"{user.characterName} used {abilityName} on {target.characterName}, dealing {power} damage!");
+        onLog?.Invoke($"{user.characterName} used {abilityName} on {target.characterName}, dealing {power} damage!");
     }
 }
 
