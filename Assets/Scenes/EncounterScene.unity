@@ -1763,7 +1763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48da50eaf43f09e4c8f9f09154eb9d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
-  characterName: Ghost
+  characterName: Enemy
   maxHP: 100
   currentHP: 100
   maxMana: 200

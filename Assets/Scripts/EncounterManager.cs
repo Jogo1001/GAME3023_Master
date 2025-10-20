@@ -21,6 +21,7 @@ public class EncounterManager : MonoBehaviour
     public GameObject battleLogPanel; 
     public Button toggleLogButton;
 
+    //devlog 4
     private List<Ability> playerAbilities = new List<Ability>();
     private List<Ability> enemyAbilities = new List<Ability>();
     private bool playerTurn = true;
