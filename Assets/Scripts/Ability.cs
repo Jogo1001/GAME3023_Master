@@ -6,7 +6,7 @@ public class Ability
 {
     public string abilityName;
     public int power;
-    public int manaCost;
+    public int manaCost; // Devlog 4
     public string description;
 
     public Ability(string name, int power, int manaCost, string description)

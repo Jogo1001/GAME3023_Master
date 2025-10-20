@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro; // ?? Important for TextMesh Pro
+using TMPro; // Devlog 4
 
 public class EncounterManager : MonoBehaviour
 {
@@ -23,9 +23,9 @@ public class EncounterManager : MonoBehaviour
 
     //devlog 4
     private List<Ability> playerAbilities = new List<Ability>();
-    private List<Ability> enemyAbilities = new List<Ability>();
-    private bool playerTurn = true;
-    private bool isBattleLogVisible = false;
+    private List<Ability> enemyAbilities = new List<Ability>(); // Devlog 4
+    private bool playerTurn = true; // Devlog 4
+    private bool isBattleLogVisible = false; // Devlog 4
 
     private void Start()
     {
@@ -54,8 +54,8 @@ public class EncounterManager : MonoBehaviour
 
         // Enemy Abilities
         enemyAbilities.Clear();
-        enemyAbilities.Add(new Ability("Claw Swipe", 8, 5, "A simple physical strike."));
-        enemyAbilities.Add(new Ability("Fire Breath", 14, 10, "A fiery attack that burns energy."));
+        enemyAbilities.Add(new Ability("Claw Swipe", 8, 5, "A simple physical strike.")); // Devlog 4
+        enemyAbilities.Add(new Ability("Fire Breath", 14, 10, "A fiery attack that burns energy.")); // Devlog 4
     }
 
     private void GenerateAbilityButtons()
@@ -93,8 +93,8 @@ public class EncounterManager : MonoBehaviour
         Invoke(nameof(EnemyTurn), 1f);
     }
 
-    private void EnemyTurn()
-    {
+    private void EnemyTurn() // Devlog 4
+    { 
         var usableAbilities = enemyAbilities
             .Where(a => enemy.currentMana >= a.manaCost)
             .ToList();
@@ -120,7 +120,7 @@ public class EncounterManager : MonoBehaviour
         playerTurn = true;
     }
 
-    private Ability ChooseEnemyAbility(List<Ability> abilities)
+    private Ability ChooseEnemyAbility(List<Ability> abilities) // Devlog 4
     {
         bool goStrong = Random.value < 0.6f;
         return goStrong
@@ -165,12 +165,12 @@ public class EncounterManager : MonoBehaviour
         battleLogText.text += message + "\n";
     }
 
-    private void UpdateStatsUI()
+    private void UpdateStatsUI() // Devlog 4
     {
         playerStatsText.text = $"{player.characterName}\nHP: {player.currentHP}/{player.maxHP}\nMP: {player.currentMana}/{player.maxMana}";
         enemyStatsText.text = $"{enemy.characterName}\nHP: {enemy.currentHP}/{enemy.maxHP}\nMP: {enemy.currentMana}/{enemy.maxMana}";
     }
-    private void ToggleBattleLog()
+    private void ToggleBattleLog() // Devlog 4
     {
         isBattleLogVisible = !isBattleLogVisible;
         battleLogPanel.SetActive(isBattleLogVisible);
