@@ -32,7 +32,11 @@ public class ItemPickup : MonoBehaviour
    
     void Update()
     {
-        
+        if (isPlayerNearby && Input.GetKeyDown(pickupKey))
+        {
+            HandleItemPickup();
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -50,5 +54,24 @@ public class ItemPickup : MonoBehaviour
             pickupUI?.SetActive(false);
             isPlayerNearby = false;
         }
+    }
+    private void HandleItemPickup()
+    {
+
+        pickupUI?.SetActive(false);
+
+        if (itemMessageText != null)
+        {
+            itemMessageText.text = $"Picked up: {itemName}\n{description}";
+        }
+
+        itemMessageUI?.SetActive(true);
+        isMessageVisible = true;
+
+       
+        Destroy(gameObject, 0.1f);
+
+    
+    
     }
 }
