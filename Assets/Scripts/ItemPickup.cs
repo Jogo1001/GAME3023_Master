@@ -15,12 +15,18 @@ public class ItemPickup : MonoBehaviour
     public GameObject itemMessageUI;
     public TextMeshProUGUI itemMessageText;
 
+    [Header("Settings")]
+    public KeyCode pickupKey = KeyCode.E;    
+    public KeyCode dismissKey = KeyCode.Space;
 
 
+    private bool isPlayerNearby = false;
+    private bool isMessageVisible = false;
 
     void Start()
     {
-        
+        pickupUI?.SetActive(false);
+        itemMessageUI?.SetActive(false);
     }
 
    
@@ -33,14 +39,16 @@ public class ItemPickup : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            Debug.Log("Test");
+            pickupUI?.SetActive(true);
+            isPlayerNearby = true;
         }
     }
    void OnTriggerExit2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
-            Debug.Log("exit");
+            pickupUI?.SetActive(false);
+            isPlayerNearby = false;
         }
     }
 }
