@@ -18,15 +18,22 @@ public class ItemPickup : MonoBehaviour
     [Header("Settings")]
     public KeyCode pickupKey = KeyCode.E;    
     public KeyCode dismissKey = KeyCode.Space;
+    public float messageDuration = 3f;
 
 
     private bool isPlayerNearby = false;
     private bool isMessageVisible = false;
 
+    public SpriteRenderer spriteRenderer;
+    public Collider2D itemCollider;
+
     void Start()
     {
         pickupUI?.SetActive(false);
         itemMessageUI?.SetActive(false);
+
+        spriteRenderer = spriteRenderer ?? GetComponent<SpriteRenderer>();
+        itemCollider = itemCollider ?? GetComponent<Collider2D>();
     }
 
    
@@ -37,6 +44,11 @@ public class ItemPickup : MonoBehaviour
             HandleItemPickup();
         }
 
+
+        if (isMessageVisible && Input.GetKeyDown(dismissKey))
+        {
+            HideItemMessage();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -68,10 +80,27 @@ public class ItemPickup : MonoBehaviour
         itemMessageUI?.SetActive(true);
         isMessageVisible = true;
 
-       
-        Destroy(gameObject, 0.1f);
 
-    
-    
+        if (spriteRenderer != null) spriteRenderer.enabled = false;
+        if (itemCollider != null) itemCollider.enabled = false;
+
+      
+        Invoke(nameof(DestroyItem), messageDuration);
+
+
+
+    }
+    private void HideItemMessage()
+    {
+        itemMessageUI?.SetActive(false);
+        isMessageVisible = false;
+     
+        DestroyItem();
+    }
+    private void DestroyItem()
+    {
+        itemMessageText.text = $"";
+        itemMessageUI.SetActive(false);
+        Destroy(gameObject);
     }
 }
