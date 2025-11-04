@@ -14,6 +14,7 @@ public class ItemPickup : MonoBehaviour
     public GameObject pickupUI;
     public GameObject itemMessageUI;
     public TextMeshProUGUI itemMessageText;
+    public TextMeshProUGUI ItemCollected;
 
     [Header("Settings")]
     public KeyCode pickupKey = KeyCode.E;    
@@ -26,6 +27,7 @@ public class ItemPickup : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     public Collider2D itemCollider;
+    private static int totalCollected = 0;
 
     void Start()
     {
@@ -34,11 +36,21 @@ public class ItemPickup : MonoBehaviour
 
         spriteRenderer = spriteRenderer ?? GetComponent<SpriteRenderer>();
         itemCollider = itemCollider ?? GetComponent<Collider2D>();
+
+        UpdateItemCollectedUI();
     }
 
    
     void Update()
     {
+        if(messageDuration <= 2)
+        {
+            messageDuration = 3;
+        }
+        if(messageDuration >= 4)
+        {
+            messageDuration = 3;
+        }
         if (isPlayerNearby && Input.GetKeyDown(pickupKey))
         {
             HandleItemPickup();
@@ -69,7 +81,7 @@ public class ItemPickup : MonoBehaviour
     }
     private void HandleItemPickup()
     {
-
+   
         pickupUI?.SetActive(false);
 
         if (itemMessageText != null)
@@ -84,9 +96,12 @@ public class ItemPickup : MonoBehaviour
         if (spriteRenderer != null) spriteRenderer.enabled = false;
         if (itemCollider != null) itemCollider.enabled = false;
 
-      
+
+
         Invoke(nameof(DestroyItem), messageDuration);
 
+        totalCollected++;
+        UpdateItemCollectedUI();
 
 
     }
@@ -94,13 +109,23 @@ public class ItemPickup : MonoBehaviour
     {
         itemMessageUI?.SetActive(false);
         isMessageVisible = false;
-     
+      
+
+
         DestroyItem();
+       
     }
     private void DestroyItem()
     {
         itemMessageText.text = $"";
         itemMessageUI.SetActive(false);
         Destroy(gameObject);
+    }
+    private void UpdateItemCollectedUI()
+    {
+        if (ItemCollected != null)
+        {
+            ItemCollected.text = $"x{totalCollected}";
+        }
     }
 }

@@ -127,7 +127,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.42, y: 0.75}
+  m_Size: {x: 0.27, y: 0.47}
   m_Direction: 0
 --- !u!114 &7914231528812679611
 MonoBehaviour:
@@ -146,6 +146,9 @@ MonoBehaviour:
   pickupUI: {fileID: 0}
   itemMessageUI: {fileID: 0}
   itemMessageText: {fileID: 0}
+  ItemCollected: {fileID: 0}
   pickupKey: 101
   dismissKey: 32
   messageDuration: 3
+  spriteRenderer: {fileID: 4838546753787432260}
+  itemCollider: {fileID: 560923114918890225}
