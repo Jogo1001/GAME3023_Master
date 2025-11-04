@@ -43,17 +43,11 @@ public class ItemPickup : MonoBehaviour
    
     void Update()
     {
-        if(messageDuration <= 2)
-        {
-            messageDuration = 3;
-        }
-        if(messageDuration >= 4)
-        {
-            messageDuration = 3;
-        }
+ 
         if (isPlayerNearby && Input.GetKeyDown(pickupKey))
         {
             HandleItemPickup();
+          
         }
 
 
@@ -120,6 +114,7 @@ public class ItemPickup : MonoBehaviour
         itemMessageText.text = $"";
         itemMessageUI.SetActive(false);
         Destroy(gameObject);
+        messageDuration = 3f;
     }
     private void UpdateItemCollectedUI()
     {
