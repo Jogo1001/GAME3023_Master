@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1b7097442fce848af94386d3195315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  player: {fileID: 1387027869}
+  player: {fileID: 1589257249}
   saveButton: {fileID: 80838336}
   continueButton: {fileID: 0}
 --- !u!4 &24849880
@@ -4987,6 +4987,7 @@ MonoBehaviour:
   IsPlayerMoving: 0
   PlayerRB: {fileID: 1198704402}
   encounterCooldownTime: 2
+  defaultSpawnPosition: {x: 0, y: 0}
 --- !u!50 &1198704402
 Rigidbody2D:
   serializedVersion: 5
@@ -5081,10 +5082,11 @@ Transform:
   m_GameObject: {fileID: 1198704400}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1589257250}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1198704405
@@ -5325,55 +5327,6 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4838546753787432260, guid: 2a7c1e356bc306c4db8f796a1140dd6a, type: 3}
   m_PrefabInstance: {fileID: 1256004408}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1387027868
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1387027870}
-  - component: {fileID: 1387027869}
-  m_Layer: 0
-  m_Name: Character
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1387027869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1387027868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48da50eaf43f09e4c8f9f09154eb9d20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Character
-  characterName: George
-  maxHP: 50
-  currentHP: 0
-  maxMana: 200
-  currentMana: 0
---- !u!4 &1387027870
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1387027868}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2173.3625, y: 1080, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1412332684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5529,6 +5482,55 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 21.95, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1589257248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1589257250}
+  - component: {fileID: 1589257249}
+  m_Layer: 0
+  m_Name: Character
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1589257249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589257248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48da50eaf43f09e4c8f9f09154eb9d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Character
+  characterName: George
+  maxHP: 50
+  currentHP: 0
+  maxMana: 200
+  currentMana: 0
+--- !u!4 &1589257250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589257248}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1198704404}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1785863481
 GameObject:
   m_ObjectHideFlags: 0
@@ -6195,4 +6197,3 @@ SceneRoots:
   - {fileID: 1256004408}
   - {fileID: 27317855}
   - {fileID: 24849880}
-  - {fileID: 1387027870}

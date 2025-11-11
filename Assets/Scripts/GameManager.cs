@@ -27,12 +27,14 @@ public class GameManager : MonoBehaviour
         if (SaveSystem.HasSaveData())
         {
             PlayerData data = SaveSystem.LoadGame();
-            SceneManager.LoadScene("Devlog");
+            
 
             PlayerPrefs.SetFloat("SavedX", data.positionX);
             PlayerPrefs.SetFloat("SavedY", data.positionY);
             PlayerPrefs.SetInt("SavedHP", data.currentHP);
             PlayerPrefs.SetInt("SavedMana", data.currentMana);
+
+            SceneManager.LoadScene("Devlog");
         }
     }
     public void MainMenuButtonClicked()
@@ -41,6 +43,12 @@ public class GameManager : MonoBehaviour
     }
     public void OnNewGameButtonClicked()
     {
+        SaveSystem.DeleteSave();
+        PlayerPrefs.DeleteKey("SavedX");
+        PlayerPrefs.DeleteKey("SavedY");
+        PlayerPrefs.DeleteKey("SavedHP");
+        PlayerPrefs.DeleteKey("SavedMana");
+        PlayerPrefs.Save();
         SceneManager.LoadScene("Devlog");
     }
     public void QuitGameButtonClicked()

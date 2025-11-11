@@ -46,8 +46,13 @@ public class SaveSystem
             return data;
         }
 
-
+        Debug.LogWarning("No save file found!");
         return null;
+    }
+    public static void DeleteSave()
+    {
+        if (File.Exists(saveFile))
+            File.Delete(saveFile);
     }
     public static bool HasSaveData() => File.Exists(saveFile);
 }

@@ -19,13 +19,29 @@ public class PlayerMovement : MonoBehaviour
 
     public float encounterCooldownTime = 2f; //devlog 2 
     private float encounterCooldown = 5f; //devlog 2
-
+    public Vector2 defaultSpawnPosition = new Vector2(0, 0);
 
     private void Awake()
     {
         GeorgeAnimator = GetComponent<Animator>();
     }
+    void Start()
+    {
+        if (PlayerPrefs.HasKey("SavedX") && PlayerPrefs.HasKey("SavedY"))
+        {
+            float x = PlayerPrefs.GetFloat("SavedX");
+            float y = PlayerPrefs.GetFloat("SavedY");
+            transform.position = new Vector2(x, y);
 
+            Debug.Log($"Loaded player position: ({x}, {y})");
+        }
+        else
+        {
+        
+            transform.position = defaultSpawnPosition;
+          
+        }
+    }
 
 
 
