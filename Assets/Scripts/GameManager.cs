@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
+    public Character player;
 
 
     [Header("UI Buttons")]
@@ -11,9 +11,15 @@ public class GameManager : MonoBehaviour
     public GameObject continueButton;
     void Start()
     {
-        
+        if (continueButton != null)
+            continueButton.SetActive(SaveSystem.HasSaveData());
     }
+    public void SaveGame()
+    {
 
+        SaveSystem.SaveGame(player);
+
+    }
 
 
     public void NewGame()

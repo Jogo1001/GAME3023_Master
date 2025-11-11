@@ -8,10 +8,19 @@ public class Character : MonoBehaviour
     public int maxMana = 200; // Devlog 4
     public int currentMana; // Devlog 4
 
-    private void Start()
+    void Start()
     {
         currentHP = maxHP;
         currentMana = maxMana;
+
+        if (PlayerPrefs.HasKey("SavedX") && PlayerPrefs.HasKey("SavedY"))
+        {
+            float x = PlayerPrefs.GetFloat("SavedX");
+            float y = PlayerPrefs.GetFloat("SavedY");
+            transform.position = new Vector2(x, y);
+
+            Debug.Log($"Loaded player position: ({x}, {y})");
+        }
     }
 
     public void TakeDamage(int damage)

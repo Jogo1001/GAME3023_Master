@@ -2,6 +2,7 @@ using UnityEngine;
 using System.IO;
 
 
+[System.Serializable]
 public class PlayerData
 {
     public float positionX;
@@ -16,14 +17,23 @@ public class PlayerData
 public class SaveSystem
 {
     private static string saveFile = Application.persistentDataPath + "/save.json";
-    void Start()
-    {
-        
-    }
+   
 
-    // Update is called once per frame
-    void Update()
+    public static void SaveGame(Character player)
     {
-        
+        PlayerData data = new PlayerData
+        {
+            positionX = player.transform.position.x,
+            positionY = player.transform.position.y,  
+            currentHP = player.currentHP,
+            currentMana = player.currentMana
+
+
+        };
+
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(saveFile, json);
+        Debug.Log($"Game saved at {saveFile}");
     }
+    public static bool HasSaveData() => File.Exists(saveFile);
 }
