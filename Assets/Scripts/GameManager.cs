@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,11 +21,20 @@ public class GameManager : MonoBehaviour
 
     }
 
-
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
     public void NewGame()
     {
         SceneManager.LoadScene("Devlog");
     }
-
+    public void QuitGame()
+    {
+       Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
+      
+    }
+    
 
 }
