@@ -35,5 +35,19 @@ public class SaveSystem
         File.WriteAllText(saveFile, json);
         Debug.Log($"Game saved at {saveFile}");
     }
+
+    public static PlayerData LoadGame()
+    {
+        if(File.Exists(saveFile))
+        {
+            string json = File.ReadAllText(saveFile);
+            PlayerData data = JsonUtility.FromJson<PlayerData>(json);
+            Debug.Log("Game loaded successfully.");
+            return data;
+        }
+
+
+        return null;
+    }
     public static bool HasSaveData() => File.Exists(saveFile);
 }

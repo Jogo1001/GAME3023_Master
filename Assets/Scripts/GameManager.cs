@@ -14,22 +14,36 @@ public class GameManager : MonoBehaviour
         if (continueButton != null)
             continueButton.SetActive(SaveSystem.HasSaveData());
     }
-    public void SaveGame()
+    public void SaveGameButtonClicked()
     {
 
         SaveSystem.SaveGame(player);
 
     }
 
-    public void MainMenu()
+
+    public void OnContinueButtonClicked()
+    {
+        if (SaveSystem.HasSaveData())
+        {
+            PlayerData data = SaveSystem.LoadGame();
+            SceneManager.LoadScene("Devlog");
+
+            PlayerPrefs.SetFloat("SavedX", data.positionX);
+            PlayerPrefs.SetFloat("SavedY", data.positionY);
+            PlayerPrefs.SetInt("SavedHP", data.currentHP);
+            PlayerPrefs.SetInt("SavedMana", data.currentMana);
+        }
+    }
+    public void MainMenuButtonClicked()
     {
         SceneManager.LoadScene("MainScene");
     }
-    public void NewGame()
+    public void OnNewGameButtonClicked()
     {
         SceneManager.LoadScene("Devlog");
     }
-    public void QuitGame()
+    public void QuitGameButtonClicked()
     {
        Application.Quit();
         UnityEditor.EditorApplication.isPlaying = false;
